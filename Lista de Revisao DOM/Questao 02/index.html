@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Post</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+ 
+    input, button {
+      padding: 8px;
+    }
+ 
+    #resultado {
+      margin-top: 20px;
+    }
+ 
+    .erro {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+ 
+    <h1>Buscar Post</h1>
+    <input type="number" id="campoId">
+    <button onclick="buscarPost()">Buscar</button>
+    <div id="resultado"></div>
+
+    <script>
+        const posts =[       
+    { userId: 1, id: 1, title: "Primeiro post", body: "Aprendendo a manipular o DOM." },
+    { userId: 1, id: 2, title: "Segundo post", body: "Arrays de objetos são parecidos com o JSON de uma API." },
+    { userId: 2, id: 3, title: "Terceiro post", body: "Em breve vamos buscar estes dados no servidor." },
+    { userId: 2, id: 4, title: "Quarto post", body: "O método find devolve o primeiro item encontrado." },
+    { userId: 3, id: 5, title: "Quinto post", body: "Se nada for encontrado, find devolve undefined." }
+    ];
+
+    function buscarPost(){
+        const valor = document.getElementById("campoId").value;
+        const resultado = document.getElementById("resultado");
+        if (valor === ""){
+            resultado.innerHTML = "Digite um ID";
+            return;
+        }
+        const id = Number(valor);
+        const post = posts.find(function(p){
+            return p.id === id;
+        });
+        if (post === undefined){
+            resultado.innerHTML ='<p class="erro">Post não encontrado (ID ' + id + '). Os IDs validos vão de 1 a 5. </p>';
+            return;
+        } 
+        resultado.innerHTML = "<h2>" + post.title + "</h2><p>" + post.body + "</p>";
+        }
+    </script>
+
+</body>
+</html>
